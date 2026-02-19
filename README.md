@@ -1,1 +1,2 @@
-# c-hw-cem2
+# Repository for C homework
+Shalakhina Anna B-43 SPBU
