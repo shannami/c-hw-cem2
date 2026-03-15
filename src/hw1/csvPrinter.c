@@ -14,7 +14,7 @@ struct CSVTable {
     int widthCol[MAX_COLS];
 };
 
-CSVTable* createTable()
+CSVTable* createTable(void)
 {
     CSVTable* ptr = malloc(sizeof(CSVTable));
     if (ptr != NULL) {
