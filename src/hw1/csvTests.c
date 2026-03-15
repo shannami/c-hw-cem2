@@ -3,33 +3,33 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool testIsNumber()
+bool testIsNumber(void)
 {
     bool result = isNumber("123") && isNumber("17.23") && isNumber("-28");
     return result;
 }
 
-bool testIsNotNumber()
+bool testIsNotNumber(void)
 {
     bool result = !isNumber("-16f") && !isNumber("1a.23") && !isNumber("aaa");
     return result;
 }
 
-bool testFormatCellNumber()
+bool testFormatCellNumber(void)
 {
     char testbuf[100];
     formatCell(testbuf, 5, "10");
     return strcmp(testbuf, "    10 ") == 0;
 }
 
-bool testFormatCellText()
+bool testFormatCellText(void)
 {
     char testbuf[100];
     formatCell(testbuf, 5, "Bob");
     return strcmp(testbuf, " Bob   ") == 0;
 }
 
-bool testColumnWidth()
+bool testColumnWidth(void)
 {
     char testbuf[100];
     formatCell(testbuf, 5, "Hello");

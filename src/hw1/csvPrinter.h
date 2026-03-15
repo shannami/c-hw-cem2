@@ -3,7 +3,7 @@
 
 typedef struct CSVTable CSVTable;
 
-CSVTable* createTable();
+CSVTable* createTable(void);
 /*освобождение памяти*/
 void deleteTable(CSVTable* table);
 /*инициализации таблицы*/

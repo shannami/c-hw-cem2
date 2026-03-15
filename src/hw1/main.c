@@ -1,7 +1,7 @@
 #include "csvPrinter.h"
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
     CSVTable* table = createTable();
     if (!table)

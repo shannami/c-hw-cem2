@@ -4,6 +4,3 @@ project(homeworks C)
 add_compile_options(-Wall -Wextra -pedantic)
 
 add_subdirectory(src/hw1)
-
-
-
