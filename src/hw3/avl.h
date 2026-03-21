@@ -19,7 +19,7 @@ Node* insert(Node* node, char* code, char* name);
 /*поиск минимального элемента*/
 Node* findMin(Node* node);
 /*удаление узла по коду*/
-Node* delete (Node* node, char* code);
+Node* delete(Node* node, char* code);
 /*поиск узла*/
 Node* find(Node* node, char* code);
 /*возвращает название аэропорта по коду*/
