@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
         else if (strncmp(line, "delete ", 7) == 0) {
             char* code = line + 7;
             const char* name = getName(root, code);
-            root = delete(root, code);
+            root = deleteNode(root, code);
             if (name)
                 count--;
             printf("Аэропорт '%s' удалён в базе.\n", code);

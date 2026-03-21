@@ -111,17 +111,17 @@ Node* findMin(Node* node)
     return node;
 }
 
-Node* delete(Node* node, char* code)
+Node* deleteNode(Node* node, char* code)
 {
     if (!node)
         return NULL;
 
     int cmp = strcmp(code, node->code);
     if (cmp < 0) {
-        node->leftChild = delete(node->leftChild, code);
+        node->leftChild = deleteNode(node->leftChild, code);
         ++node->balance;
     } else if (cmp > 0) {
-        node->rightChild = delete(node->rightChild, code);
+        node->rightChild = deleteNode(node->rightChild, code);
         --node->balance;
     } else {
         if (node->leftChild == NULL && node->rightChild == NULL) {
@@ -151,7 +151,7 @@ Node* delete(Node* node, char* code)
         free(node->name);
         node->name = malloc(strlen(min->name) + 1);
         strcpy(node->name, min->name);
-        node->rightChild = delete(node->rightChild, min->code);
+        node->rightChild = deleteNode(node->rightChild, min->code);
         --node->balance;
     }
     return balance(node);
