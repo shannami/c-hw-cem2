@@ -1,4 +1,4 @@
-add_library(graphLib avl.c)
+add_library(graphLib graph.c)
 
 add_executable(graph main.c)
 
