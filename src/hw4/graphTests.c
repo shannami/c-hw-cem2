@@ -8,7 +8,7 @@ bool testOneCapital(void)
 {
     Graph* graph = createGraph(3);
 
-    addEdge(graph, 0, 1, 3); // дорога 0-1 с весом 3
+    addEdge(graph, 0, 1, 3);
     addEdge(graph, 1, 2, 2);
 
     int capitals[] = { 0 };
