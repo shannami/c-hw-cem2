@@ -8,10 +8,8 @@ bool testOneCapital(void)
 {
     Graph* graph = createGraph(3);
 
-    addEdge(graph, 0, 1, 3);
-    addEdge(graph, 1, 0, 5);
+    addEdge(graph, 0, 1, 3); // дорога 0-1 с весом 3
     addEdge(graph, 1, 2, 2);
-    addEdge(graph, 2, 1, 1);
 
     int capitals[] = { 0 };
 
@@ -29,11 +27,8 @@ bool testTwoCapitals(void)
 {
     Graph* graph = createGraph(4);
 
-    addEdge(graph, 0, 1, 1);
     addEdge(graph, 1, 0, 1);
     addEdge(graph, 1, 2, 1);
-    addEdge(graph, 2, 1, 1);
-    addEdge(graph, 2, 3, 1);
     addEdge(graph, 3, 2, 1);
 
     int capitals[] = { 0, 3 };
@@ -53,13 +48,9 @@ bool testWeighted(void)
     Graph* graph = createGraph(4);
 
     addEdge(graph, 0, 1, 1);
-    addEdge(graph, 1, 0, 1);
     addEdge(graph, 1, 2, 10);
-    addEdge(graph, 2, 1, 10);
     addEdge(graph, 0, 2, 5);
-    addEdge(graph, 2, 0, 5);
     addEdge(graph, 2, 3, 1);
-    addEdge(graph, 3, 2, 1);
 
     int capitals[] = { 0, 3 };
 

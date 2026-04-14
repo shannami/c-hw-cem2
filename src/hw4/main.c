@@ -2,34 +2,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(int argc, char* argv[])
 {
-    int n = 0;
-    int m = 0;
-    printf("введите число городов и число дорог:\n");
-    scanf("%d %d", &n, &m);
+    FILE* inf = stdin;
+
+    if (argc > 1) {
+        inf = fopen(argv[1], "r");
+        if (!inf) {
+            fprintf(stderr, "файл не открывается");
+            return 1;
+        }
+    }
+
+    int n = 0, m = 0;
+    fscanf(inf, "%d %d", &n, &m);
 
     Graph* graph = createGraph(n);
 
-    printf("введите %d дорог в формате: from to len \n", m);
-
     for (int i = 0; i < m; i++) {
         int a = 0, b = 0, len = 0;
-        scanf("%d %d %d", &a, &b, &len);
+        fscanf(inf, "%d %d %d", &a, &b, &len);
         a--;
         b--;
         addEdge(graph, a, b, len);
-        addEdge(graph, b, a, len);
     }
 
     int k = 0;
-    printf("введите кол-во столиц:\n");
-    scanf("%d", &k);
+
+    fscanf(inf, "%d", &k);
 
     int* capitals = malloc(k * sizeof(int));
-    printf("введите номера столиц:\n");
     for (int i = 0; i < k; i++) {
-        scanf("%d", &capitals[i]);
+        fscanf(inf, "%d", &capitals[i]);
         capitals[i]--;
     }
 
@@ -45,6 +49,9 @@ int main()
         }
         printf("\n");
     }
+
+    if (inf != stdin)
+        fclose(inf);
 
     free(country);
     free(capitals);

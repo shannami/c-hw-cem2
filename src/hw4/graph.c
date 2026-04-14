@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,60 +36,64 @@ void addEdge(Graph* g, int from, int to, int len)
 {
     Vertex* v = &g->vertices[from];
 
-    int size = v->size;
+    int sizeV = v->size;
 
-    v->edges = realloc(v->edges, (size + 1) * sizeof(Edge));
+    v->edges = realloc(v->edges, (sizeV + 1) * sizeof(Edge));
 
-    v->edges[size].to = to;
-    v->edges[size].len = len;
+    v->edges[sizeV].to = to;
+    v->edges[sizeV].len = len;
 
     v->size++;
+
+    Vertex* u = &g->vertices[to];
+
+    int sizeU = u->size;
+
+    u->edges = realloc(u->edges, (sizeU + 1) * sizeof(Edge));
+
+    u->edges[sizeU].to = from;
+    u->edges[sizeU].len = len;
+
+    u->size++;
 }
 
 int* distributionByCountry(Graph* graph, int* capitals, int k)
 {
     int n = graph->n;
-    int* d = malloc(sizeof(int) * n);
-    int* country = malloc(sizeof(int) * n);
-    int* used = calloc(n, sizeof(int));
+    int* country = malloc(n * sizeof(int));
 
-    for (int i = 0; i < n; i++) {
-        d[i] = 1e9;
+    for (int i = 0; i < n; i++)
         country[i] = -1;
-    }
 
-    for (int i = 0; i < k; i++) {
-        int c = capitals[i];
-        d[c] = 0;
-        country[c] = i;
-    }
+    for (int i = 0; i < k; i++)
+        country[capitals[i]] = i;
 
-    for (int iter = 0; iter < n; iter++) {
-        int v = -1;
+    int freeCities = n - k;
 
-        for (int i = 0; i < n; i++) {
-            if (!used[i] && (v == -1 || d[i] < d[v])) {
-                v = i;
+    while (freeCities > 0) {
+        for (int c = 0; c < k; c++) {
+            int city = -1;
+            int dist = INT_MAX;
+
+            for (int v = 0; v < n; v++) {
+                if (country[v] != c)
+                    continue;
+
+                for (int i = 0; i < graph->vertices[v].size; i++) {
+                    Edge e = graph->vertices[v].edges[i];
+                    if (country[e.to] == -1 && e.len < dist) {
+                        dist = e.len;
+                        city = e.to;
+                    }
+                }
+            }
+
+            if (city != -1) {
+                country[city] = c;
+                freeCities--;
             }
         }
-
-        if (v == -1 || d[v] == 1e9)
-            break;
-
-        used[v] = 1;
-
-        for (int i = 0; i < graph->vertices[v].size; i++) {
-            Edge e = graph->vertices[v].edges[i];
-
-            if (d[v] + e.len < d[e.to]) {
-                d[e.to] = d[v] + e.len;
-                country[e.to] = country[v];
-            }
-        }
     }
-
-    free(d);
-    free(used);
 
     return country;
 }
